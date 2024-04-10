@@ -2,8 +2,6 @@ require("@nomicfoundation/hardhat-toolbox");
 
 const { vars } = require("hardhat/config");
 
-
-
 // Go to https://infura.io, sign up, create a new API key
 // in its dashboard, and store it as the "INFURA_API_KEY"
 // configuration variable
@@ -19,8 +17,9 @@ const INFURA_API_KEY = vars.get("INFURA_API_KEY");
 // Beware: NEVER put real Ether into testing accounts
 const SEPOLIA_PRIVATE_KEY = vars.get("SEPOLIA_PRIVATE_KEY");
 
-
 const ETHERSCAN_API_KEY = vars.get("ETHERSCAN_API_KEY");
+
+const BSCTESTNET_API_KEY = vars.get("BSCTESTNET_API_KEY");
 
 /** @type import('hardhat/config').HardhatUserConfig */
 
@@ -38,9 +37,9 @@ module.exports = {
       accounts: [SEPOLIA_PRIVATE_KEY],
     },
     bnbtestnet: {
-      url: `https://bsc-testnet.core.chainstack.com/65f2f5af7b66d3ea9524cdb32b3e3188`,
+      url: `https://bsc-testnet.core.chainstack.com/${BSCTESTNET_API_KEY}`,
       accounts: [SEPOLIA_PRIVATE_KEY],
-    }
+    },
   },
 
   etherscan: {
@@ -59,7 +58,6 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
     console.log(account.address);
   }
 });
-
 
 task("balance", "Prints an account's balance")
   .addParam("account", "The account's address")
